@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2d3d3;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+        }
+
+        #score {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <button id="click-button">Cliquez-moi!</button>
+        <p>Points: <span id="score">0</span></p>
+        <div id="upgrades">
+            <button id="upgrade-1" class="upgrade" style="display: none;">Amélioration 1 (250 points)</button>
+            <button id="upgrade-2" class="upgrade" style="display: none;">Amélioration 2 (500 points)</button>
+        </div>
+    </div>
+    <script>
+        let score = 0;
+        let clickValue = 1;
+
+        document.getElementById('click-button').addEventListener('click', () => {
+            score += clickValue;
+            updateScore();
+            checkUpgrades();
+        });
+
+        document.getElementById('upgrade-1').addEventListener('click', () => {
+            if (score >= 250) {
+                score -= 250;
+                clickValue *= 2;
+                document.getElementById('upgrade-1').style.display = 'none';
+                updateScore();
+            }
+        });
+
+        document.getElementById('upgrade-2').addEventListener('click', () => {
+            if (score >= 500) {
+                score -= 500;
+                clickValue *= 2;
+                document.getElementById('upgrade-2').style.display = 'none';
+                updateScore();
+            }
+        });
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+        }
+
+        function checkUpgrades() {
+            if (score >= 100) {
+                document.getElementById('upgrade-1').style.display = 'inline-block';
+            }
+            if (score >= 200) {
+                document.getElementById('upgrade-2').style.display = 'inline-block';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
